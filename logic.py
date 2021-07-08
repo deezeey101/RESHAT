@@ -1,129 +1,36 @@
+def remove_it(self):
+        screen = self.outputLabel.text()
+        screen = screen[:-1]
+        self.outputLabel.setText(screen)
 
-from tkinter import *
+    def solver(self):
+        screen = self.outputLabel.text()
+        try:
+            answer = eval(screen)
+            self.outputLabel.setText(str(answer))
+        except:
+            self.outputLabel.setText("Error")
 
-expression = ''
-
-def press(num): 
-
-    global expression 
-  
-    expression = expression + str(num)
-    equation.set(expression) 
-  
-def equalpress(): 
-
-    try: 
-        global expression 
-
-        total = str(eval(expression)) 
-        equation.set(total) 
-
-        expression = '' 
-
-    except: 
-        equation.set(' error ') 
-        expression = '' 
-  
-def clear():
+    # Change from positive/negative
+    def plus_minus_it(self):
+        screen = self.outputLabel.text()
+        if "-" in screen:
+            self.outputLabel.setText(screen.replace("-", ""))
+        else:
+            self.outputLabel.setText(f'-{screen}')
     
-    global expression 
-    expression = '' 
-    equation.set('0')
+    # decimal
+    def dot_it(self):
+        screen = self.outputLabel.text()
+        if screen[-1] == ".":
+            pass
+        else:
+            self.outputLabel.setText(screen + ".")         
 
-root = Tk()
-
-root.geometry('355x475')
-  
-root.configure(bg='#fcb577')
-  
-root.title('Calculator') 
-
-root.iconbitmap('c.ico')
-
-root.resizable(False,False)
-  
-button_frame = Frame(root,bg='#fcb577')
-button_frame.pack()
-
-equation = StringVar()
-equation.set('0')
-    
-expression_field = Entry(button_frame,textvariable=equation,justify='right',
-                                 font = ('arial',20,'bold'))
-    
-button1 = Button(button_frame,font= ('times new roman',12),text=' 1 ',bd=1,relief='ridge',
-                 fg='black', bg='#e6ecff',command=lambda: press(1), height=3, width=8) 
- 
-button2 = Button(button_frame,font= ('times new roman',12),text=' 2 ',bd=1,relief='ridge',
-                 fg='black', bg='#e6ecff',command=lambda: press(2), height=3, width=8) 
-  
-button3 = Button(button_frame,font= ('times new roman',12),text=' 3 ',bd=1,relief='ridge',
-                 fg='black', bg='#e6ecff',command=lambda: press(3), height=3, width=8) 
-
-plus = Button(button_frame,font= ('times new roman',12),text=' + ',bd=1,relief='ridge',
-              fg='black', bg='#e6ecff',command=lambda: press("+"), height=3, width=8) 
-  
-button4 = Button(button_frame,font= ('times new roman',12),text=' 4 ',bd=1,relief='ridge',
-                 fg='black', bg='#e6ecff',command=lambda: press(4), height=3, width=8) 
-
-button5 = Button(button_frame,font= ('times new roman',12),text=' 5 ',bd=1,relief='ridge',
-                 fg='black', bg='#e6ecff',command=lambda: press(5), height=3, width=8) 
-  
-button6 = Button(button_frame,font= ('times new roman',12),text=' 6 ',bd=1,relief='ridge',
-                 fg='black', bg='#e6ecff',command=lambda: press(6), height=3, width=8) 
-
-minus = Button(button_frame,font= ('times new roman',12),text=' - ',bd=1,relief='ridge',
-               fg='black', bg='#e6ecff',command=lambda: press("-"), height=3, width=8) 
-  
-button7 = Button(button_frame,font= ('times new roman',12),text=' 7 ',bd=1,relief='ridge',
-                 fg='black', bg='#e6ecff',command=lambda: press(7), height=3, width=8) 
-  
-button8 = Button(button_frame,font= ('times new roman',12),text=' 8 ',bd=1,relief='ridge',
-                 fg='black', bg='#e6ecff',command=lambda: press(8), height=3, width=8) 
-  
-button9 = Button(button_frame,font= ('times new roman',12),text=' 9 ',bd=1,relief='ridge',
-                 fg='black', bg='#e6ecff',command=lambda: press(9), height=3, width=8) 
-
-multiply = Button(button_frame,font= ('times new roman',12),text=' * ',bd=1,relief='ridge',
-                  fg='black', bg='#e6ecff',command=lambda: press("*"), height=3, width=8) 
-  
-button0 = Button(button_frame,font= ('times new roman',12),text=' 0 ',bd=1,relief='ridge',
-                 fg='black', bg='#e6ecff',command=lambda: press(0), height=3, width=8) 
-
-decimal= Button(button_frame,font= ('times new roman',12),text='.',bd=1,relief='ridge',
-                fg='black', bg='#e6ecff',command=lambda: press('.'), height=3, width=8) 
-
-clear = Button(button_frame,font= ('times new roman',12),text='C',bd=1,relief='ridge',
-               fg='black', bg='#e6ecff',command=clear, height=3, width=8) 
-  
-divide = Button(button_frame,font= ('times new roman',12),text=' / ',bd=1,relief='ridge',
-                fg='black', bg='#e6ecff',command=lambda: press("/"), height=3, width=8) 
-
-equal = Button(button_frame,font= ('times new roman',12),text=' = ',bd=1,relief='ridge',
-               fg='black', bg='#e6ecff',command=equalpress,height=3) 
-
-expression_field.grid(row=0,column=0,ipadx=8,columnspan = 4,ipady=25,pady=15)
-
-button1.grid(row=1, column=0)
-button2.grid(row=1, column=1)
-button3.grid(row=1, column=2)
-plus.grid(row=1, column=3)
-
-button4.grid(row=2, column=0)
-button5.grid(row=2, column=1)
-button6.grid(row=2, column=2)
-minus.grid(row=2, column=3)
-
-button7.grid(row=3, column=0)
-button8.grid(row=3, column=1)
-button9.grid(row=3, column=2)
-multiply.grid(row=3, column=3)
-
-button0.grid(row=4, column=0)
-decimal.grid(row=4, column=1)
-clear.grid(row=4, column=2)
-divide.grid(row=4, column=3)
-
-equal.grid(row=5, column=0,columnspan = 4,sticky='nsew')
-
-root.mainloop() 
+    def press_it(self, pressed):
+        if pressed == "C":
+            self.outputLabel.setText("0")
+        else:
+            if self.outputLabel.text() == "0":
+                self.outputLabel.setText("")    
+            self.outputLabel.setText(f'{self.outputLabel.text()}{pressed}')
